@@ -1,46 +1,45 @@
-# ==========================================
-# PROYECTO: REPLICA DE DISTRIBUCIONES EN R
-# ==========================================
+# =====================================================================
+# PROYECTO: RÉPLICA DE DISTRIBUCIONES ESTADÍSTICAS EN R
+# Objetivo: Replicar las funciones nativas (d, p, q, r) desde cero.
+# =====================================================================
 
-# ------------------------------------------
-# 1. FUNCIÓN MAESTRA (Despachador)
-# ------------------------------------------
-# Esta función recibe qué distribución y qué tipo (d, p, q, r) se desea.
+# ---------------------------------------------------------------------
+# SECCIÓN 1: [Carlos] (6 Distribuciones)
+# Distribuciones: Normal, Binomial, Poisson, Exponencial, t de Student, ji-cuadrado
+# ---------------------------------------------------------------------
 
-simulador_dist <- function(distribucion, tipo, x, ...) {
-  # distribucion: "binomial", "normal", "poisson", etc.
-  # tipo: "d" (densidad), "p" (acumulada), "q" (cuantil), "r" (aleatorio)
-  
-  if (distribucion == "normal") {
-    resultado <- normal_custom(tipo, x, ...)
-  } else if (distribucion == "binomial") {
-    resultado <- binomial_custom(tipo, x, ...)
-  }
-  # Agregar el resto con ifelse o switch...
-  
-  return(resultado)
-}
-
-# ------------------------------------------
-# 2. SECCIÓN DE [TU NOMBRE]
-# (Aquí van tus 6 distribuciones)
-# ------------------------------------------
-
-normal_custom <- function(tipo, x, mean = 0, sd = 1) {
+mi_normal <- function(tipo, x, mean = 0, sd = 1) {
   if (tipo == "d") {
-    # Lógica de dnorm matemática aquí
+    # Lógica de densidad (PDF)
   } else if (tipo == "p") {
-    # Lógica de pnorm
-  } # ...
+    # Lógica acumulada (CDF)
+  } else if (tipo == "q") {
+    # Lógica de cuantiles
+  } else if (tipo == "r") {
+    # Lógica de números aleatorios (n = x)
+  }
 }
 
-# ------------------------------------------
-# 3. SECCIÓN DE MAI
-# (Aquí van las 5 distribuciones de Mai)
-# ------------------------------------------
+# (Agrega aquí el esqueleto de tus otras 5 distribuciones: 
+# mi_binomial, mi_poisson, mi_exponencial, mi_tstudent, mi_jicuadrado)
 
-binomial_custom <- function(tipo, x, size, prob) {
+
+# ---------------------------------------------------------------------
+# SECCIÓN 2: MAI (5 Distribuciones)
+# Distribuciones: Geométrico, Hipergeométrico, F, Gama, Beta
+# ---------------------------------------------------------------------
+
+mi_geometrico <- function(tipo, x, prob) {
   if (tipo == "d") {
-    # Lógica de dbinom matemática aquí
-  } # ...
+    # Lógica de masa de probabilidad (PMF)
+  } else if (tipo == "p") {
+    # Lógica acumulada (CDF)
+  } else if (tipo == "q") {
+    # Lógica de cuantiles
+  } else if (tipo == "r") {
+    # Lógica de números aleatorios (n = x)
+  }
 }
+
+# (Mai agregará aquí el esqueleto de sus otras 4 distribuciones:
+# mi_hipergeometrico, mi_F, mi_gama, mi_beta)
