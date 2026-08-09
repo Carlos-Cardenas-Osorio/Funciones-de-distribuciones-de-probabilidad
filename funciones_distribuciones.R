@@ -38,6 +38,33 @@ mi_normal <- function(tipo, x, mean = 0, sd = 1) {
   }
 }
 
+mi_binomial <- function(tipo, x, size, prob) {
+  if (tipo == "d") {
+    # Función masa de probabilidad
+    choose(size,x)*prob^x*(1-prob)^(size-x)
+  } else if (tipo == "p") {
+    # Función acumulada
+    sum(
+      sapply(0:x,function(t){choose(size,t)*prob^t*(1-prob)^(size-t)}
+             )
+      )
+  } else if (tipo == "q") {
+    pdf <- sapply(0:size, 
+            function(t){
+           choose(size,t)*prob^t*(1-prob)^(size-t)
+                  })
+    which(cumsum(pdf)>=x)[1]-1
+    
+  } else if (tipo == "r") {
+    # x numeros aleatorios
+    replicate(x, 
+              sum(
+                runif(size)<prob
+              )
+              )
+  }
+}
+
 # (Agrega aquí el esqueleto de tus otras 5 distribuciones: 
 # mi_binomial, mi_poisson, mi_exponencial, mi_tstudent, mi_jicuadrado)
 
