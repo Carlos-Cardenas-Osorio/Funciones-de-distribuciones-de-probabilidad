@@ -42,29 +42,102 @@ mi_binomial <- function(tipo, x, size, prob) {
   if (tipo == "d") {
     # Función masa de probabilidad
     choose(size,x)*prob^x*(1-prob)^(size-x)
+    
   } else if (tipo == "p") {
     # Función acumulada
     sum(
       sapply(0:x,function(t){choose(size,t)*prob^t*(1-prob)^(size-t)}
              )
       )
+    
   } else if (tipo == "q") {
+    #Acumulada 
     pdf <- sapply(0:size, 
             function(t){
            choose(size,t)*prob^t*(1-prob)^(size-t)
                   })
+    #Calculo del cuantil
     which(cumsum(pdf)>=x)[1]-1
     
   } else if (tipo == "r") {
     # x numeros aleatorios
     replicate(x, 
-              sum(
-                runif(size)<prob
-              )
+              sum(runif(size)<prob)
               )
   }
 }
 
+mi_poisson <- function(tipo, x, lambda) {
+  if (tipo == "d") {
+    # Función masa de probabilidad
+    (lambda^x * exp(-lambda)) / factorial(x)
+    
+  } else if (tipo == "p") {
+    # Función acumulada
+    sum(
+      sapply(0:x, function(t) {
+        (lambda^t * exp(-lambda)) / factorial(t)
+      })
+    )
+    
+  } else if (tipo == "q") {
+    # Limite seguro
+    limite <- max(100, ceiling(lambda + 10 * sqrt(lambda)))
+    pdf <- sapply(0:limite, function(t) {
+      (lambda^t * exp(-lambda)) / factorial(t)
+    })
+    which(cumsum(pdf) >= x)[1] - 1
+    
+  } else if (tipo == "r") {
+    # Algoritmo clásico de multiplicación de uniformes
+    replicate(x, {
+      L <- exp(-lambda)
+      k <- 0
+      p <- 1
+      while (p > L) {
+        p <- p * runif(1)
+        k <- k + 1
+      }
+      k - 1
+    })
+  }
+}
+
+mi_exponencial <- function(tipo, x, prob) {
+  if (tipo == "d") {
+    # Lógica de masa de probabilidad (PMF)
+  } else if (tipo == "p") {
+    # Lógica acumulada (CDF)
+  } else if (tipo == "q") {
+    # Lógica de cuantiles
+  } else if (tipo == "r") {
+    # Lógica de números aleatorios (n = x)
+  }
+}
+
+mi_tstudent <- function(tipo, x, prob) {
+  if (tipo == "d") {
+    # Lógica de masa de probabilidad (PMF)
+  } else if (tipo == "p") {
+    # Lógica acumulada (CDF)
+  } else if (tipo == "q") {
+    # Lógica de cuantiles
+  } else if (tipo == "r") {
+    # Lógica de números aleatorios (n = x)
+  }
+}
+
+mi_jicuadrado <- function(tipo, x, prob) {
+  if (tipo == "d") {
+    # Lógica de masa de probabilidad (PMF)
+  } else if (tipo == "p") {
+    # Lógica acumulada (CDF)
+  } else if (tipo == "q") {
+    # Lógica de cuantiles
+  } else if (tipo == "r") {
+    # Lógica de números aleatorios (n = x)
+  }
+}
 # (Agrega aquí el esqueleto de tus otras 5 distribuciones: 
 # mi_binomial, mi_poisson, mi_exponencial, mi_tstudent, mi_jicuadrado)
 
