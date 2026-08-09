@@ -128,15 +128,39 @@ mi_exponencial <- function(tipo, x, rate = 1) {
   }
 }
 
-mi_tstudent <- function(tipo, x, prob) {
+mi_tstudent <- function(tipo, x, df) {
   if (tipo == "d") {
-    # Lógica de masa de probabilidad (PMF)
+    # Función de densidad
+    numerador <- gamma((df + 1) / 2)
+    denominador <- sqrt(df * pi) * gamma(df / 2)
+    (numerador / denominador) * (1 + (x^2) / df)^(-(df + 1) / 2)
+    
   } else if (tipo == "p") {
-    # Lógica acumulada (CDF)
+    # Función acumulada
+    integrate(function(t) {
+      numerador <- gamma((df + 1) / 2)
+      denominador <- sqrt(df * pi) * gamma(df / 2)
+      (numerador / denominador) * (1 + (t^2) / df)^(-(df + 1) / 2)
+    }, -Inf, x)$value
+    
   } else if (tipo == "q") {
-    # Lógica de cuantiles
+    # Cuantiles
+    uniroot(function(u) {
+      integrate(function(t) {
+        numerador <- gamma((df + 1) / 2)
+        denominador <- sqrt(df * pi) * gamma(df / 2)
+        (numerador / denominador) * (1 + (t^2) / df)^(-(df + 1) / 2)
+      }, -Inf, u)$value - x
+    }, interval = c(-1000, 1000))$root
+    
   } else if (tipo == "r") {
-    # Lógica de números aleatorios (n = x)
+    #T-Student se forma dividiendo una Normal Estándar 
+    # entre la raíz de una Ji-cuadrado sobre sus grados de libertad
+    replicate(x, {
+      Z <- sqrt(-2 * log(runif(1))) * cos(2 * pi * runif(1)) # 1 Normal
+      V <- sum((sqrt(-2 * log(runif(df))) * cos(2 * pi * runif(df)))^2) # 1 Ji-cuadrado
+      Z / sqrt(V / df)
+    })
   }
 }
 
