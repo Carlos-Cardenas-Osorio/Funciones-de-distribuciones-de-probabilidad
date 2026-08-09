@@ -164,19 +164,35 @@ mi_tstudent <- function(tipo, x, df) {
   }
 }
 
-mi_jicuadrado <- function(tipo, x, prob) {
+mi_jicuadrado <- function(tipo, x, df) {
   if (tipo == "d") {
-    # Lógica de masa de probabilidad (PMF)
+    # Función de densidad
+    (x^((df/2) - 1) * exp(-x/2)) / (2^(df/2) * gamma(df/2))
+    
   } else if (tipo == "p") {
-    # Lógica acumulada (CDF)
+    # Función acumulada
+    integrate(function(t) {
+      (t^((df/2) - 1) * exp(-t/2)) / (2^(df/2) * gamma(df/2))
+    }, 0, x)$value
+    
   } else if (tipo == "q") {
-    # Lógica de cuantiles
+    # Cuantiles
+    limite_superior <- df + 100 * sqrt(2 * df) # Límite dinámico seguro
+    uniroot(function(u) {
+      integrate(function(t) {
+        (t^((df/2) - 1) * exp(-t/2)) / (2^(df/2) * gamma(df/2))
+      }, 0, u)$value - x
+    }, interval = c(0, limite_superior))$root
+    
   } else if (tipo == "r") {
-    # Lógica de números aleatorios (n = x)
+    # Una Ji-cuadrado es la suma de 'df' Normales Estándar al cuadrado
+    # Replicamos el método Box-Muller de tu función Normal y lo elevamos al cuadrado
+    replicate(x, {
+      normales_estandar <- sqrt(-2 * log(runif(df))) * cos(2 * pi * runif(df))
+      sum(normales_estandar^2)
+    })
   }
 }
-# (Agrega aquí el esqueleto de tus otras 5 distribuciones: 
-# mi_binomial, mi_poisson, mi_exponencial, mi_tstudent, mi_jicuadrado)
 
 
 # ---------------------------------------------------------------------

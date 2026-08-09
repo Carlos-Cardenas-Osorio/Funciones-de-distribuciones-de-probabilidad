@@ -3,7 +3,7 @@
     "path": "~/GitHub/Funciones-de-distribuciones-de-probabilidad/funciones_distribuciones.R",
     "project_path": "funciones_distribuciones.R",
     "type": "r_source",
-    "hash": "0",
+    "hash": "391644524",
     "contents": "",
     "dirty": false,
     "created": 1786207165955.0,
@@ -13,15 +13,15 @@
         "tempName": "Untitled1",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "146,15",
-        "scrollLine": "131"
+        "cursorPosition": "195,0",
+        "scrollLine": "179"
     },
     "folds": "",
-    "lastKnownWriteTime": 1786313858,
+    "lastKnownWriteTime": 1786313931,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1786313858881,
+    "last_content_update": 1786313931593,
     "read_only": false,
     "read_only_alternatives": []
 }
