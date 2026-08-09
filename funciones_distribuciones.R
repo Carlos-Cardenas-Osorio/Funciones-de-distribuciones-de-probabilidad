@@ -10,13 +10,31 @@
 
 mi_normal <- function(tipo, x, mean = 0, sd = 1) {
   if (tipo == "d") {
-    # Lógica de densidad (PDF)
+    #Función de densidad
+    1/(sd*sqrt(2*pi))*exp(-1/2*((x-mean)/sd)^2)
+    
   } else if (tipo == "p") {
-    # Lógica acumulada (CDF)
+    #Función acumulada
+    integrate( function(t){ 
+      1/(sd*sqrt(2*pi))*exp(-1/2*((t-mean)/sd)^2)
+      },-Inf,x)$value
+    
   } else if (tipo == "q") {
-    # Lógica de cuantiles
+    #Raíz
+    uniroot(function(u){
+      #Función acumulada
+      integrate( function(t){    
+        1/(sd*sqrt(2*pi))*exp(-1/2*((t-mean)/sd)^2)
+      },-Inf,u)$value -x
+    },interval = c(mean-10*sd,mean+10*sd))$root
+    
   } else if (tipo == "r") {
-    # Lógica de números aleatorios (n = x)
+    # Transformada de Box-Muller
+    U_1 <- runif(x)
+    U_2 <- runif(x)
+    Z<-sqrt(-2*log(U_1))*cos(2*pi*U_2)
+    X<-Z*sd+mean
+    return(X)
   }
 }
 
