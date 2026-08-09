@@ -103,15 +103,28 @@ mi_poisson <- function(tipo, x, lambda) {
   }
 }
 
-mi_exponencial <- function(tipo, x, prob) {
+mi_exponencial <- function(tipo, x, rate = 1) {
   if (tipo == "d") {
-    # Lógica de masa de probabilidad (PMF)
+    # Función de densidad
+    rate * exp(-rate * x)
+    
   } else if (tipo == "p") {
-    # Lógica acumulada (CDF)
+    # Función acumulada 
+    integrate(function(t) {
+      rate * exp(-rate * t)
+    }, 0, x)$value
+    
   } else if (tipo == "q") {
-    # Lógica de cuantiles
+    # Cuantiles
+    uniroot(function(u) {
+      integrate(function(t) {
+        rate * exp(-rate * t)
+      }, 0, u)$value - x
+    }, interval = c(0, 1000 / rate))$root
+    
   } else if (tipo == "r") {
-    # Lógica de números aleatorios (n = x)
+    # Método de la transformada inversa
+    replicate(x, -log(runif(1)) / rate)
   }
 }
 
