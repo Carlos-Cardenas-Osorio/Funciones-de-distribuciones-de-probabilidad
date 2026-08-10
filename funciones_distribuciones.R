@@ -200,6 +200,7 @@ mi_jicuadrado <- function(tipo, x, df) {
 # Distribuciones: Geométrico, Hipergeométrico, F, Gama, Beta
 # ---------------------------------------------------------------------
 
+#jajajaj
 mi_geometrico <- function(tipo, x, prob) {
   if (tipo == "d") {
     # Lógica de masa de probabilidad (PMF)
