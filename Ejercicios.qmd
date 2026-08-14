@@ -4,6 +4,10 @@ format: html
 editor: visual
 ---
 
+```{r}
+source("funciones_distribuciones.R")
+```
+
 # Ejercicio 1
 
 En una fábrica se sabe que la probabilidad de que r artículos sean defectuosos es $P[X=k]=\frac{4^ke^{-4}}{k!}$. Determinar la probabilidad de que en 100 días el número de artículos defectuosos esté comprendido entre 400 y 600.
