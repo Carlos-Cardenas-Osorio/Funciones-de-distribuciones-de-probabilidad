@@ -200,7 +200,7 @@ mi_jicuadrado <- function(tipo, x, df) {
 # Distribuciones: Geométrico, Hipergeométrico, F, Gama, Beta
 # ---------------------------------------------------------------------
 
-#jajajaj
+#
 mi_geometrico <- function(tipo, x, prob) {
   if (tipo == "d") {
     (1 - prob)^x * prob  # Lógica de masa de probabilidad (PMF)
@@ -373,6 +373,3 @@ mi_beta <- function(tipo, x, shape1, shape2) {
   }
 }
 
-
-# (Mai agregará aquí el esqueleto de sus otras 4 distribuciones:
-# mi_hipergeometrico, mi_F, mi_gama, mi_beta)
