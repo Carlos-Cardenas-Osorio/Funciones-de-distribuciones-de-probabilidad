@@ -13,7 +13,15 @@ source("funciones_distribuciones.R")
 En una fábrica se sabe que la probabilidad de que r artículos sean defectuosos es $P[X=k]=\frac{4^ke^{-4}}{k!}$. Determinar la probabilidad de que en 100 días el número de artículos defectuosos esté comprendido entre 400 y 600.
 
 ```{r}
+# La distribución diaria es Poisson con lambda = 4. 
+lambda_total_7 <- 4 * 100
 
+# Nos piden P(400 < X < 600), lo cual equivale a P(X <= 599) - P(X <= 400)
+p_599 <- mi_poisson("p", x = 599, lambda = lambda_total_7)
+p_400 <- mi_poisson("p", x = 400, lambda = lambda_total_7)
+
+prob_ej7 <- p_599 - p_400
+cat("Ejercicio 1 - P(400 < X < 600) =", prob_ej7, "\n")
 ```
 
 # Ejercicio 2
@@ -27,7 +35,26 @@ b\) ¿Cuál es la probabilidad de que fallen menos de dos componentes en 50 hora
 c)¿Cuál es la probabilidad de que fallen por lo menos tres componentes en 125 horas?
 
 ```{r}
+# Tasa base dada en el problema
+tasa_por_hora <- 8 / 100 
 
+# a) Probabilidad de que falle un componente en 25 horas (X = 1)
+lambda_25 <- tasa_por_hora * 25 
+
+prob_a <- mi_poisson("d", x = 1, lambda = lambda_25) 
+cat("Inciso a) P(X = 1) en 25 horas =", prob_a, "\n")
+
+#b) Probabilidad de que fallen menos de dos componentes en 50 horas (X < 2 -> P(X <= 1))
+lambda_50 <- tasa_por_hora * 50  
+
+prob_b <- mi_poisson("p", x = 1, lambda = lambda_50) 
+cat("Inciso b) P(X < 2) en 50 horas =", prob_b, "\n")
+
+# c) Probabilidad de que fallen por lo menos tres componentes en 125 horas (X >= 3 -> 1 - P(X <= 2))
+lambda_125 <- tasa_por_hora * 125  
+
+prob_c <- 1 - mi_poisson("p", x = 2, lambda = lambda_125) 
+cat("Inciso c) P(X >= 3) en 125 horas =", prob_c, "\n")
 ```
 
 # Ejercicio 3
@@ -55,18 +82,60 @@ i\) $Pr[|X-60| \geq 20]$
 j\) Número de opositores que obtuvieron 70 puntos
 
 ```{r}
+mu_9 <- 60
+sd_9 <- 10
 
+# a) P(X >= 70)
+a_9 <- 1 - mi_normal("p", 70, mean = mu_9, sd = sd_9)
+
+# b) P(X <= 80)
+b_9 <- mi_normal("p", 80, mean = mu_9, sd = sd_9)
+
+# c) P(X <= 30)
+c_9 <- mi_normal("p", 30, mean = mu_9, sd = sd_9)
+
+# d) P(X >= 46)
+d_9 <- 1 - mi_normal("p", 46, mean = mu_9, sd = sd_9)
+
+# e) P(39 <= X <= 80)
+e_9 <- mi_normal("p", 80, mean = mu_9, sd = sd_9) - mi_normal("p", 39, mean = mu_9, sd = sd_9)
+
+# f) P(80 <= X <= 82.5)
+f_9 <- mi_normal("p", 82.5, mean = mu_9, sd = sd_9) - mi_normal("p", 80, mean = mu_9, sd = sd_9)
+
+# g) P(30 <= X <= 40)
+g_9 <- mi_normal("p", 40, mean = mu_9, sd = sd_9) - mi_normal("p", 30, mean = mu_9, sd = sd_9)
+
+# h) P(|X - 60| <= 20) -> Equivalente a P(40 <= X <= 80)
+h_9 <- mi_normal("p", 80, mean = mu_9, sd = sd_9) - mi_normal("p", 40, mean = mu_9, sd = sd_9)
+
+# i) P(|X - 60| >= 20) -> Equivalente a 1 - P(40 <= X <= 80)
+i_9 <- 1 - h_9
+
+# j) Número de opositores 
+j_9 <- mi_normal("d", 70, mean = mu_9, sd = sd_9) * 200
+
+cat("Ejercicio 3 a) P(X >= 70) =", a_9, "\n")
+cat("Ejercicio 3 b) P(X <= 80) =", b_9, "\n")
+cat("Ejercicio 3 c) P(X <= 30) =", c_9, "\n")
+cat("Ejercicio 3 d) P(X >= 46) =", d_9, "\n")
+cat("Ejercicio 3 e) P(39 <= X <= 80) =", e_9, "\n")
+cat("Ejercicio 3 f) P(80 <= X <= 82.5) =", f_9, "\n")
+cat("Ejercicio 3 g) P(30 <= X <= 40) =", g_9, "\n")
+cat("Ejercicio 3 h) P(|X-60| <= 20) =", h_9, "\n")
+cat("Ejercicio 3 i) P(|X-60| >= 20) =", i_9, "\n")
+cat("Ejercicio 3 j) Opositores aprox con 70 puntos =", j_9, "\n")
 ```
 
 # Ejercicio 4
 
 Una agencia ofrece un premio entre los distribuciones si venden trescientos veinte o más paquetes de viajes por día. Sabiendo que el número de paquetes de viajes vendidos al día por los distribuciones A y B siguen una ley normal de la forma siguiente:
 
-|               |                        |                      |
-|---------------|------------------------|----------------------|
-| Distribuidor  | Media                  | Desviación típica    |
-| A             | 290 paquetes de viaje  | 20 paquetes de viaje |
-| B             | 300 paquetes de viaje  | 10 paquetes de viaje |
+|              |                       |                      |
+|--------------|-----------------------|----------------------|
+| Distribuidor | Media                 | Desviación típica    |
+| A            | 290 paquetes de viaje | 20 paquetes de viaje |
+| B            | 300 paquetes de viaje | 10 paquetes de viaje |
 
 Se pide:
 
@@ -79,7 +148,30 @@ c\) A qué distribuidor beneficia la decisión de la agencia.
 d\) Si se asocian los dos distribuciones. ¿qué porcentaje de días obtendrían premio?
 
 ```{r}
+meta <- 320
 
+# a) Porcentaje de días que obtiene premio el distribuidor A: P(A >= 320)
+p_a_10 <- 1 - mi_normal("p", meta, mean = 290, sd = 20)
+porc_a_10 <- p_a_10 * 100
+
+# b) Porcentaje de días que obtiene premio el distribuidor B: P(B >= 320)
+p_b_10 <- 1 - mi_normal("p", meta, mean = 300, sd = 10)
+porc_b_10 <- p_b_10 * 100
+
+# c) ¿A qué distribuidor beneficia? (Se decide comparando los porcentajes)
+beneficia_a <- porc_a_10 > porc_b_10
+
+# d) Si se asocian (Suma A + B): 
+media_asoc <- 290 + 300
+sd_asoc <- sqrt(20^2 + 10^2)
+meta_asoc <- 320 * 2
+
+p_asoc_10 <- 1 - mi_normal("p", meta_asoc, mean = media_asoc, sd = sd_asoc)
+porc_asoc_10 <- p_asoc_10 * 100
+
+cat("Ejercicio 4 a) Porcentaje A =", porc_a_10, "%\n")
+cat("Ejercicio 4 b) Porcentaje B =", porc_b_10, "%\n")
+cat("Ejercicio 4 d) Porcentaje Asociados =", porc_asoc_10, "%\n")
 ```
 
 # Ejercicio 5
@@ -97,10 +189,33 @@ d\) Porcentaje de operaciones con tarjeta que utiliza el 10% más bajo de la pob
 e\) Porcentaje de operaciones del 80% más próximo a la media.
 
 ```{r}
+mu_11 <- 4.5
+sd_11 <- 0.5
 
+# a) Que un ciudadano utilizado sea mayor al 5% -> P(X > 5)
+a_11 <- 1 - mi_normal("p", 5, mean = mu_11, sd = sd_11)
+
+# b) Tanto por ciento de la ciudad que utiliza la tarjeta menos del 3.75% -> P(X < 3.75) * 100
+b_11 <- mi_normal("p", 3.75, mean = mu_11, sd = sd_11) * 100
+
+# c) Porcentaje de operaciones que utiliza el 20% más alto (Cuantil 0.80)
+c_11 <- mi_normal("q", 0.80, mean = mu_11, sd = sd_11)
+
+# d) Porcentaje de operaciones que utiliza el 10% más bajo (Cuantil 0.10)
+d_11 <- mi_normal("q", 0.10, mean = mu_11, sd = sd_11)
+
+# e) Porcentaje de operaciones del 80% más próximo a la media (Entre percentil 10 y 90)
+e_inf <- mi_normal("q", 0.10, mean = mu_11, sd = sd_11)
+e_sup <- mi_normal("q", 0.90, mean = mu_11, sd = sd_11)
+
+cat("Ejercicio 5 a) P(X > 5) =", a_11, "\n")
+cat("Ejercicio 5 b) Porcentaje < 3.75% =", b_11, "%\n")
+cat("Ejercicio 5 c) 20% más alto (valor límite) =", c_11, "\n")
+cat("Ejercicio 5 d) 10% más bajo (valor límite) =", d_11, "\n")
+cat("Ejercicio 5 e) Intervalo central 80% [", e_inf, ",", e_sup, "]\n")
 ```
 
-# Ejercicio 6 
+# Ejercicio 6
 
 El tiempo de revisión del motor de un avión sigue aproximadamente una distribución exponencial, con media 22 minutos.
 
@@ -111,7 +226,20 @@ b\) El costo de la revisión es de 200 euros por cada media hora o fracción. ¿
 c\) Para efectuar una programación sobre la revisiones del motor, ¿cuánto tiempo se debe asignar a cada revisión para que la probabilidad de que cualquier tiempo de revisión mayor al tiempo asignado sea solo de 0.1?
 
 ```{r}
+rate_35 <- 1 / 22
 
+# a) Probabilidad de que el tiempo de revisión sea menor de 10 minutos -> P(X < 10)
+a_35 <- mi_exponencial("p", 10, rate = rate_35)
+
+# b) Costo de 400 euros por cada media hora o fracción (es decir, si supera 30 y hasta 60 minutos) -> P(30 < X <= 60)
+b_35 <- mi_exponencial("p", 60, rate = rate_35) - mi_exponencial("p", 30, rate = rate_35)
+
+# c) Tiempo asignado para que la probabilidad de superar dicho tiempo sea de 0.1 -> P(X > t) = 0.1, o sea P(X <= t) = 0.9
+c_35 <- mi_exponencial("q", 0.9, rate = rate_35)
+
+cat("Ejercicio 6 a) P(X < 10) =", a_35, "\n")
+cat("Ejercicio 6 b) P(30 < X <= 60) =", b_35, "\n")
+cat("Ejercicio 6 c) Tiempo asignado (cuantil 0.9) =", c_35, "minutos\n")
 ```
 
 # Ejercicio 7
@@ -123,7 +251,16 @@ a\) Probabilidad de que sobrepase las 200 horas de uso.
 b\) ¿Cuántas horas se mantiene funcionando con probabilidad 0.95?
 
 ```{r}
+rate_40 <- -log(0.1) / 100
 
+# a) Probabilidad de que sobrepase las 200 horas de uso -> P(X > 200) = 1 - P(X <= 200)
+a_40 <- 1 - mi_exponencial("p", 200, rate = rate_40)
+
+# b) ¿Cuántas horas se mantiene funcionando con probabilidad 0.95? -> Cuantil 0.95
+b_40 <- mi_exponencial("q", 0.95, rate = rate_40)
+
+cat("Ejercicio 7 a) P(X > 200) =", a_40, "\n")
+cat("Ejercicio 7 b) Horas con probabilidad 0.95 =", b_40, "\n")
 ```
 
 # Ejercicio 8
@@ -131,5 +268,12 @@ b\) ¿Cuántas horas se mantiene funcionando con probabilidad 0.95?
 La cabina de un avión tiene 30 dispositivos electrónicos ($E_1,...,E_{30}$), tan pronto como falla $E_1$, se activa $E_2$ , y así sucesivamente. El tiempo de fallo de cualquier dispositivo electrónico $E_i$ es de tipo exponencial con parámetro $\lambda=0.1$ hora. Hallar la probabilidad de que el tiempo total de funcionamiento de todos los dispositivos supere las 350 horas.
 
 ```{r}
+shape_41 <- 30
+rate_41 <- 0.1
+
+# Hallar la probabilidad de que el tiempo total de funcionamiento supere las 350 horas -> P(Total > 350) = 1 - P(Total <= 350)
+prob_41 <- 1 - mi_gama("p", 350, shape = shape_41, rate = rate_41)
+
+cat("Ejercicio 8 - P(Total > 350 horas) =", prob_41, "\n")
 
 ```
