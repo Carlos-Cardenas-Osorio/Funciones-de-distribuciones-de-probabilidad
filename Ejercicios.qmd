@@ -6,7 +6,11 @@ editor: visual
 
 # Ejercicio 1
 
-En una fábrica se sabe que la probabilidad de que r artículos sean defectuosos es $P[X=k]=\frac{4^ke^{-4}{k!}$. Determinar la probabilidad de que en 100 días el número de artículos defectuosos esté comprendido entre 400 y 600.
+En una fábrica se sabe que la probabilidad de que r artículos sean defectuosos es $P[X=k]=\frac{4^ke^{-4}}{k!}$. Determinar la probabilidad de que en 100 días el número de artículos defectuosos esté comprendido entre 400 y 600.
+
+```{r}
+
+```
 
 # Ejercicio 2
 
@@ -17,6 +21,10 @@ a\) ¿Cuál es la probabilidad de que falle un componente de 25 horas?
 b\) ¿Cuál es la probabilidad de que fallen menos de dos componentes en 50 horas?
 
 c)¿Cuál es la probabilidad de que fallen por lo menos tres componentes en 125 horas?
+
+```{r}
+
+```
 
 # Ejercicio 3
 
@@ -41,3 +49,83 @@ h\) $Pr[|X-60| \leq 20]$
 i\) $Pr[|X-60| \geq 20]$
 
 j\) Número de opositores que obtuvieron 70 puntos
+
+```{r}
+
+```
+
+# Ejercicio 4
+
+Una agencia ofrece un premio entre los distribuciones si venden trescientos veinte o más paquetes de viajes por día. Sabiendo que el número de paquetes de viajes vendidos al día por los distribuciones A y B siguen una ley normal de la forma siguiente:
+
+|               |                        |                      |
+|---------------|------------------------|----------------------|
+| Distribuidor  | Media                  | Desviación típica    |
+| A             | 290 paquetes de viaje  | 20 paquetes de viaje |
+| B             | 300 paquetes de viaje  | 10 paquetes de viaje |
+
+Se pide:
+
+a\) Porcentaje de los días que obtendrá premio el distribuidor A.
+
+b\) Porcentaje de los días que obtendrá premio el distribuidor B.
+
+c\) A qué distribuidor beneficia la decisión de la agencia.
+
+d\) Si se asocian los dos distribuciones. ¿qué porcentaje de días obtendrían premio?
+
+```{r}
+
+```
+
+# Ejercicio 5
+
+La utilización de la tarjeta VISA en operaciones comerciales, en la población de una gran ciudad, sigue en porcentajes una distribución normal de media 4.5 y desviación típica 0.5. Se pide calcular las siguientes probabilidades:
+
+a\) Que un ciudadano tomado al azar utilice la tarjeta más del 5% en sus operaciones.
+
+b\) Tanto por ciento de la ciudad que utiliza la tarjeta menos del 3.75%.
+
+c\) Porcentaje de operaciones con tarjeta que utiliza el 20% más alto de la población.
+
+d\) Porcentaje de operaciones con tarjeta que utiliza el 10% más bajo de la población.
+
+e\) Porcentaje de operaciones del 80% más próximo a la media.
+
+```{r}
+
+```
+
+# Ejercicio 6 
+
+El tiempo de revisión del motor de un avión sigue aproximadamente una distribución exponencial, con media 22 minutos.
+
+a\) Hallar la probabilidad de que el tiempo de la revisión sea menos de 10 minutos.
+
+b\) El costo de la revisión es de 200 euros por cada media hora o fracción. ¿Cuál es la probabilidad de que una revisión cueste 400 euros?
+
+c\) Para efectuar una programación sobre la revisiones del motor, ¿cuánto tiempo se debe asignar a cada revisión para que la probabilidad de que cualquier tiempo de revisión mayor al tiempo asignado sea solo de 0.1?
+
+```{r}
+
+```
+
+# Ejercicio 7
+
+La duración de vida de una pieza de un motor de una distribución exponencial , sabiendo que la probabilidad de que sobrepase las 100 horas de uso es de 0.9. Se pide:
+
+a\) Probabilidad de que sobrepase las 200 horas de uso.
+
+b\) ¿Cuántas horas se mantiene funcionando con probabilidad 0.95?
+
+```{r}
+
+```
+
+# Ejercicio 8
+
+La cabina de un avión tiene 30 dispositivos electrónicos ($E_1,...,E_{30}$), tan pronto como falla $E_1$, se activa $E_2$ , y así sucesivamente. El tiempo de fallo de cualquier dispositivo electrónico $E_i$ es de tipo exponencial con parámetro $\lambda=0.1$ hora. Hallar la probabilidad de que el tiempo total de funcionamiento de todos los dispositivos supere las 350 horas.
+
+```{r}
+
+```
