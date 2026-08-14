@@ -4,23 +4,40 @@ format: html
 editor: visual
 ---
 
-## Quarto
+# Ejercicio 1
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+En una fábrica se sabe que la probabilidad de que r artículos sean defectuosos es $P[X=k]=\frac{4^ke^{-4}{k!}$. Determinar la probabilidad de que en 100 días el número de artículos defectuosos esté comprendido entre 400 y 600.
 
-## Running Code
+# Ejercicio 2
 
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+Una compañía aérea observa que el número de componentes que fallan antes de cumplir 100 horas de funcionamiento es una variable aleatoria de Poisson. Si el número promedio de fallo es ocho. Se pide:
 
-```{r}
-1 + 1
-```
+a\) ¿Cuál es la probabilidad de que falle un componente de 25 horas?
 
-You can add options to executable code like this
+b\) ¿Cuál es la probabilidad de que fallen menos de dos componentes en 50 horas?
 
-```{r}
-#| echo: false
-2 * 2
-```
+c)¿Cuál es la probabilidad de que fallen por lo menos tres componentes en 125 horas?
 
-The `echo: false` option disables the printing of code (only output is displayed).
+# Ejercicio 3
+
+Un técnico realiza un test de cien ítems a unos doscientos opositores. Suponiendo que las puntuaciones X obtenidas por los opositores siguen una distribución normal de media de 60 puntos y desviación típica 10 puntos. Se pide obtener:
+
+a\) $Pr[X \geq 70]$
+
+b\) $Pr[X \leq 80]$
+
+c\) $Pr[X \leq 30]$
+
+d\) $Pr[X \geq 46]$
+
+e\) $Pr[39 \leq X \leq 80]$
+
+f\) $Pr[80 \leq X \leq 80¿2.5]$
+
+g\) $Pr[30 \leq X \leq 40]$
+
+h\) $Pr[|X-60| \leq 20]$
+
+i\) $Pr[|X-60| \geq 20]$
+
+j\) Número de opositores que obtuvieron 70 puntos
