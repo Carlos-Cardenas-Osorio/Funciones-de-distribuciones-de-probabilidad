@@ -200,7 +200,6 @@ mi_jicuadrado <- function(tipo, x, df) {
 # Distribuciones: Geométrico, Hipergeométrico, F, Gama, Beta
 # ---------------------------------------------------------------------
 
-#jajajaj
 mi_geometrico <- function(tipo, x, prob) {
   if (tipo == "d") {
     (1 - prob)^x * prob  # Lógica de masa de probabilidad (PMF)
@@ -373,6 +372,198 @@ mi_beta <- function(tipo, x, shape1, shape2) {
   }
 }
 
+# ---------------------------------------------------------------------
+# SECCIÓN 3: EJERCICIOS
+# ---------------------------------------------------------------------
 
-# (Mai agregará aquí el esqueleto de sus otras 4 distribuciones:
-# mi_hipergeometrico, mi_F, mi_gama, mi_beta)
+# =====================================================================
+# RESOLUCIÓN DEL EJERCICIO 7 USANDO MI_POISSON
+# =====================================================================
+
+# La distribución diaria es Poisson con lambda = 4. 
+lambda_total_7 <- 4 * 100
+
+# Nos piden P(400 < X < 600), lo cual equivale a P(X <= 599) - P(X <= 400)
+p_599 <- mi_poisson("p", x = 599, lambda = lambda_total_7)
+p_400 <- mi_poisson("p", x = 400, lambda = lambda_total_7)
+
+prob_ej7 <- p_599 - p_400
+cat("Ejercicio 7 - P(400 < X < 600) =", prob_ej7, "\n")
+
+# =====================================================================
+# RESOLUCIÓN DEL EJERCICIO 8 USANDO MI_POISSON
+# =====================================================================
+
+# Tasa base dada en el problema
+tasa_por_hora <- 8 / 100 
+
+# a) Probabilidad de que falle un componente en 25 horas (X = 1)
+lambda_25 <- tasa_por_hora * 25 
+
+prob_a <- mi_poisson("d", x = 1, lambda = lambda_25) 
+cat("Inciso a) P(X = 1) en 25 horas =", prob_a, "\n")
+
+#b) Probabilidad de que fallen menos de dos componentes en 50 horas (X < 2 -> P(X <= 1))
+lambda_50 <- tasa_por_hora * 50  
+
+prob_b <- mi_poisson("p", x = 1, lambda = lambda_50) 
+cat("Inciso b) P(X < 2) en 50 horas =", prob_b, "\n")
+
+# c) Probabilidad de que fallen por lo menos tres componentes en 125 horas (X >= 3 -> 1 - P(X <= 2))
+lambda_125 <- tasa_por_hora * 125  
+
+prob_c <- 1 - mi_poisson("p", x = 2, lambda = lambda_125) 
+cat("Inciso c) P(X >= 3) en 125 horas =", prob_c, "\n")
+
+# =====================================================================
+# RESOLUCIÓN DEL EJERCICIO 9 USANDO MI_NORMAL
+# =====================================================================
+
+mu_9 <- 60
+sd_9 <- 10
+
+# a) P(X >= 70)
+a_9 <- 1 - mi_normal("p", 70, mean = mu_9, sd = sd_9)
+
+# b) P(X <= 80)
+b_9 <- mi_normal("p", 80, mean = mu_9, sd = sd_9)
+
+# c) P(X <= 30)
+c_9 <- mi_normal("p", 30, mean = mu_9, sd = sd_9)
+
+# d) P(X >= 46)
+d_9 <- 1 - mi_normal("p", 46, mean = mu_9, sd = sd_9)
+
+# e) P(39 <= X <= 80)
+e_9 <- mi_normal("p", 80, mean = mu_9, sd = sd_9) - mi_normal("p", 39, mean = mu_9, sd = sd_9)
+
+# f) P(80 <= X <= 82.5)
+f_9 <- mi_normal("p", 82.5, mean = mu_9, sd = sd_9) - mi_normal("p", 80, mean = mu_9, sd = sd_9)
+
+# g) P(30 <= X <= 40)
+g_9 <- mi_normal("p", 40, mean = mu_9, sd = sd_9) - mi_normal("p", 30, mean = mu_9, sd = sd_9)
+
+# h) P(|X - 60| <= 20) -> Equivalente a P(40 <= X <= 80)
+h_9 <- mi_normal("p", 80, mean = mu_9, sd = sd_9) - mi_normal("p", 40, mean = mu_9, sd = sd_9)
+
+# i) P(|X - 60| >= 20) -> Equivalente a 1 - P(40 <= X <= 80)
+i_9 <- 1 - h_9
+
+# j) Número de opositores 
+j_9 <- mi_normal("d", 70, mean = mu_9, sd = sd_9) * 200
+
+cat("Ejercicio 9 a) P(X >= 70) =", a_9, "\n")
+cat("Ejercicio 9 b) P(X <= 80) =", b_9, "\n")
+cat("Ejercicio 9 c) P(X <= 30) =", c_9, "\n")
+cat("Ejercicio 9 d) P(X >= 46) =", d_9, "\n")
+cat("Ejercicio 9 e) P(39 <= X <= 80) =", e_9, "\n")
+cat("Ejercicio 9 f) P(80 <= X <= 82.5) =", f_9, "\n")
+cat("Ejercicio 9 g) P(30 <= X <= 40) =", g_9, "\n")
+cat("Ejercicio 9 h) P(|X-60| <= 20) =", h_9, "\n")
+cat("Ejercicio 9 i) P(|X-60| >= 20) =", i_9, "\n")
+cat("Ejercicio 9 j) Opositores aprox con 70 puntos =", j_9, "\n")
+
+# =====================================================================
+# RESOLUCIÓN DEL EJERCICIO 10 USANDO MI_NORMAL
+# =====================================================================
+
+meta <- 320
+
+# a) Porcentaje de días que obtiene premio el distribuidor A: P(A >= 320)
+p_a_10 <- 1 - mi_normal("p", meta, mean = 290, sd = 20)
+porc_a_10 <- p_a_10 * 100
+
+# b) Porcentaje de días que obtiene premio el distribuidor B: P(B >= 320)
+p_b_10 <- 1 - mi_normal("p", meta, mean = 300, sd = 10)
+porc_b_10 <- p_b_10 * 100
+
+# c) ¿A qué distribuidor beneficia? (Se decide comparando los porcentajes)
+beneficia_a <- porc_a_10 > porc_b_10
+
+# d) Si se asocian (Suma A + B): 
+media_asoc <- 290 + 300
+sd_asoc <- sqrt(20^2 + 10^2)
+meta_asoc <- 320 * 2
+
+p_asoc_10 <- 1 - mi_normal("p", meta_asoc, mean = media_asoc, sd = sd_asoc)
+porc_asoc_10 <- p_asoc_10 * 100
+
+cat("Ejercicio 10 a) Porcentaje A =", porc_a_10, "%\n")
+cat("Ejercicio 10 b) Porcentaje B =", porc_b_10, "%\n")
+cat("Ejercicio 10 d) Porcentaje Asociados =", porc_asoc_10, "%\n")
+
+# =====================================================================
+# RESOLUCIÓN DEL EJERCICIO 11 USANDO MI_NORMAL
+# =====================================================================
+
+mu_11 <- 4.5
+sd_11 <- 0.5
+
+# a) Que un ciudadano utilizado sea mayor al 5% -> P(X > 5)
+a_11 <- 1 - mi_normal("p", 5, mean = mu_11, sd = sd_11)
+
+# b) Tanto por ciento de la ciudad que utiliza la tarjeta menos del 3.75% -> P(X < 3.75) * 100
+b_11 <- mi_normal("p", 3.75, mean = mu_11, sd = sd_11) * 100
+
+# c) Porcentaje de operaciones que utiliza el 20% más alto (Cuantil 0.80)
+c_11 <- mi_normal("q", 0.80, mean = mu_11, sd = sd_11)
+
+# d) Porcentaje de operaciones que utiliza el 10% más bajo (Cuantil 0.10)
+d_11 <- mi_normal("q", 0.10, mean = mu_11, sd = sd_11)
+
+# e) Porcentaje de operaciones del 80% más próximo a la media (Entre percentil 10 y 90)
+e_inf <- mi_normal("q", 0.10, mean = mu_11, sd = sd_11)
+e_sup <- mi_normal("q", 0.90, mean = mu_11, sd = sd_11)
+
+cat("Ejercicio 11 a) P(X > 5) =", a_11, "\n")
+cat("Ejercicio 11 b) Porcentaje < 3.75% =", b_11, "%\n")
+cat("Ejercicio 11 c) 20% más alto (valor límite) =", c_11, "\n")
+cat("Ejercicio 11 d) 10% más bajo (valor límite) =", d_11, "\n")
+cat("Ejercicio 11 e) Intervalo central 80% [", e_inf, ",", e_sup, "]\n")
+
+# =====================================================================
+# RESOLUCIÓN DEL EJERCICIO 35 USANDO MI_EXPONENCIAL
+# =====================================================================
+
+rate_35 <- 1 / 22
+
+# a) Probabilidad de que el tiempo de revisión sea menor de 10 minutos -> P(X < 10)
+a_35 <- mi_exponencial("p", 10, rate = rate_35)
+
+# b) Costo de 400 euros por cada media hora o fracción (es decir, si supera 30 y hasta 60 minutos) -> P(30 < X <= 60)
+b_35 <- mi_exponencial("p", 60, rate = rate_35) - mi_exponencial("p", 30, rate = rate_35)
+
+# c) Tiempo asignado para que la probabilidad de superar dicho tiempo sea de 0.1 -> P(X > t) = 0.1, o sea P(X <= t) = 0.9
+c_35 <- mi_exponencial("q", 0.9, rate = rate_35)
+
+cat("Ejercicio 35 a) P(X < 10) =", a_35, "\n")
+cat("Ejercicio 35 b) P(30 < X <= 60) =", b_35, "\n")
+cat("Ejercicio 35 c) Tiempo asignado (cuantil 0.9) =", c_35, "minutos\n")
+
+# =====================================================================
+# RESOLUCIÓN DEL EJERCICIO 40 USANDO MI_EXPONENCIAL
+# =====================================================================
+
+rate_40 <- -log(0.1) / 100
+
+# a) Probabilidad de que sobrepase las 200 horas de uso -> P(X > 200) = 1 - P(X <= 200)
+a_40 <- 1 - mi_exponencial("p", 200, rate = rate_40)
+
+# b) ¿Cuántas horas se mantiene funcionando con probabilidad 0.95? -> Cuantil 0.95
+b_40 <- mi_exponencial("q", 0.95, rate = rate_40)
+
+cat("Ejercicio 40 a) P(X > 200) =", a_40, "\n")
+cat("Ejercicio 40 b) Horas con probabilidad 0.95 =", b_40, "\n")
+
+# =====================================================================
+# RESOLUCIÓN DEL EJERCICIO 41 USANDO MI_GAMA
+# =====================================================================
+
+shape_41 <- 30
+rate_41 <- 0.1
+
+# Hallar la probabilidad de que el tiempo total de funcionamiento supere las 350 horas -> P(Total > 350) = 1 - P(Total <= 350)
+prob_41 <- 1 - mi_gama("p", 350, shape = shape_41, rate = rate_41)
+
+cat("Ejercicio 41 - P(Total > 350 horas) =", prob_41, "\n")
+
