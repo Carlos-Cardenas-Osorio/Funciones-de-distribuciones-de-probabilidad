@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.25">
+<meta name="generator" content="quarto-1.7.32">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -61,15 +61,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="Ejercicios_files/libs/clipboard/clipboard.min.js"></script>
 <script src="Ejercicios_files/libs/quarto-html/quarto.js" type="module"></script>
 <script src="Ejercicios_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="Ejercicios_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="Ejercicios_files/libs/quarto-html/popper.min.js"></script>
 <script src="Ejercicios_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="Ejercicios_files/libs/quarto-html/anchor.min.js"></script>
 <link href="Ejercicios_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="Ejercicios_files/libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="Ejercicios_files/libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="Ejercicios_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="Ejercicios_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="Ejercicios_files/libs/bootstrap/bootstrap-d6a003b94517c951b2d65075d42fb01b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="Ejercicios_files/libs/bootstrap/bootstrap-bb462d781dde1847d9e3ccf7736099dd.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -85,7 +84,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+      if (mathElements[i].tagName == "SPAN") {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -129,7 +128,7 @@ window.Quarto = {
 
 
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"funciones_distribuciones.R"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"funciones_distribuciones.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Ejercicio 7 - P(400 &lt; X &lt; 600) = NaN 
 Inciso a) P(X = 1) en 25 horas = 0.2706706 
@@ -165,7 +164,7 @@ Ejercicio 41 - P(Total &gt; 350 horas) = 0.1770455 </code></pre>
 <h1>Ejercicio 1</h1>
 <p>En una fábrica se sabe que la probabilidad de que r artículos sean defectuosos es <span class="math inline">\(P[X=k]=\frac{4^ke^{-4}}{k!}\)</span>. Determinar la probabilidad de que en 100 días el número de artículos defectuosos esté comprendido entre 400 y 600.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># La distribución diaria es Poisson con lambda = 4. </span></span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># La distribución diaria es Poisson con lambda = 4. </span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>lambda_total_7 <span class="ot">&lt;-</span> <span class="dv">4</span> <span class="sc">*</span> <span class="dv">100</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Nos piden P(400 &lt; X &lt; 600), lo cual equivale a P(X &lt;= 599) - P(X &lt;= 400)</span></span>
@@ -173,7 +172,7 @@ Ejercicio 41 - P(Total &gt; 350 horas) = 0.1770455 </code></pre>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>p_400 <span class="ot">&lt;-</span> <span class="fu">mi_poisson</span>(<span class="st">"p"</span>, <span class="at">x =</span> <span class="dv">400</span>, <span class="at">lambda =</span> lambda_total_7)</span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>prob_ej7 <span class="ot">&lt;-</span> p_599 <span class="sc">-</span> p_400</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 1 - P(400 &lt; X &lt; 600) ="</span>, prob_ej7, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 1 - P(400 &lt; X &lt; 600) ="</span>, prob_ej7, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Ejercicio 1 - P(400 &lt; X &lt; 600) = NaN </code></pre>
 </div>
@@ -186,30 +185,30 @@ Ejercicio 41 - P(Total &gt; 350 horas) = 0.1770455 </code></pre>
 <p>b) ¿Cuál es la probabilidad de que fallen menos de dos componentes en 50 horas?</p>
 <p>c)¿Cuál es la probabilidad de que fallen por lo menos tres componentes en 125 horas?</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tasa base dada en el problema</span></span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tasa base dada en el problema</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>tasa_por_hora <span class="ot">&lt;-</span> <span class="dv">8</span> <span class="sc">/</span> <span class="dv">100</span> </span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># a) Probabilidad de que falle un componente en 25 horas (X = 1)</span></span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>lambda_25 <span class="ot">&lt;-</span> tasa_por_hora <span class="sc">*</span> <span class="dv">25</span> </span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>prob_a <span class="ot">&lt;-</span> <span class="fu">mi_poisson</span>(<span class="st">"d"</span>, <span class="at">x =</span> <span class="dv">1</span>, <span class="at">lambda =</span> lambda_25) </span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Inciso a) P(X = 1) en 25 horas ="</span>, prob_a, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Inciso a) P(X = 1) en 25 horas ="</span>, prob_a, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Inciso a) P(X = 1) en 25 horas = 0.2706706 </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#b) Probabilidad de que fallen menos de dos componentes en 50 horas (X &lt; 2 -&gt; P(X &lt;= 1))</span></span>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#b) Probabilidad de que fallen menos de dos componentes en 50 horas (X &lt; 2 -&gt; P(X &lt;= 1))</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>lambda_50 <span class="ot">&lt;-</span> tasa_por_hora <span class="sc">*</span> <span class="dv">50</span>  </span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>prob_b <span class="ot">&lt;-</span> <span class="fu">mi_poisson</span>(<span class="st">"p"</span>, <span class="at">x =</span> <span class="dv">1</span>, <span class="at">lambda =</span> lambda_50) </span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Inciso b) P(X &lt; 2) en 50 horas ="</span>, prob_b, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Inciso b) P(X &lt; 2) en 50 horas ="</span>, prob_b, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Inciso b) P(X &lt; 2) en 50 horas = 0.09157819 </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># c) Probabilidad de que fallen por lo menos tres componentes en 125 horas (X &gt;= 3 -&gt; 1 - P(X &lt;= 2))</span></span>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># c) Probabilidad de que fallen por lo menos tres componentes en 125 horas (X &gt;= 3 -&gt; 1 - P(X &lt;= 2))</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>lambda_125 <span class="ot">&lt;-</span> tasa_por_hora <span class="sc">*</span> <span class="dv">125</span>  </span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>prob_c <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">mi_poisson</span>(<span class="st">"p"</span>, <span class="at">x =</span> <span class="dv">2</span>, <span class="at">lambda =</span> lambda_125) </span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Inciso c) P(X &gt;= 3) en 125 horas ="</span>, prob_c, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Inciso c) P(X &gt;= 3) en 125 horas ="</span>, prob_c, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Inciso c) P(X &gt;= 3) en 125 horas = 0.9972306 </code></pre>
 </div>
@@ -229,7 +228,7 @@ Ejercicio 41 - P(Total &gt; 350 horas) = 0.1770455 </code></pre>
 <p>i) <span class="math inline">\(Pr[|X-60| \geq 20]\)</span></p>
 <p>j) Número de opositores que obtuvieron 70 puntos</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>mu_9 <span class="ot">&lt;-</span> <span class="dv">60</span></span>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>mu_9 <span class="ot">&lt;-</span> <span class="dv">60</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>sd_9 <span class="ot">&lt;-</span> <span class="dv">10</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># a) P(X &gt;= 70)</span></span>
@@ -262,43 +261,43 @@ Ejercicio 41 - P(Total &gt; 350 horas) = 0.1770455 </code></pre>
 <span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a><span class="co"># j) Número de opositores </span></span>
 <span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>j_9 <span class="ot">&lt;-</span> <span class="fu">mi_normal</span>(<span class="st">"d"</span>, <span class="dv">70</span>, <span class="at">mean =</span> mu_9, <span class="at">sd =</span> sd_9) <span class="sc">*</span> <span class="dv">200</span></span>
 <span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 3 a) P(X &gt;= 70) ="</span>, a_9, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 3 a) P(X &gt;= 70) ="</span>, a_9, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Ejercicio 3 a) P(X &gt;= 70) = 0.1586553 </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 3 b) P(X &lt;= 80) ="</span>, b_9, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 3 b) P(X &lt;= 80) ="</span>, b_9, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Ejercicio 3 b) P(X &lt;= 80) = 0.9772499 </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 3 c) P(X &lt;= 30) ="</span>, c_9, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 3 c) P(X &lt;= 30) ="</span>, c_9, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Ejercicio 3 c) P(X &lt;= 30) = 0.001349896 </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 3 d) P(X &gt;= 46) ="</span>, d_9, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 3 d) P(X &gt;= 46) ="</span>, d_9, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Ejercicio 3 d) P(X &gt;= 46) = 0.9192433 </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 3 e) P(39 &lt;= X &lt;= 80) ="</span>, e_9, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 3 e) P(39 &lt;= X &lt;= 80) ="</span>, e_9, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Ejercicio 3 e) P(39 &lt;= X &lt;= 80) = 0.9593855 </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 3 f) P(80 &lt;= X &lt;= 82.5) ="</span>, f_9, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 3 f) P(80 &lt;= X &lt;= 82.5) ="</span>, f_9, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Ejercicio 3 f) P(80 &lt;= X &lt;= 82.5) = 0.01052566 </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 3 g) P(30 &lt;= X &lt;= 40) ="</span>, g_9, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 3 g) P(30 &lt;= X &lt;= 40) ="</span>, g_9, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Ejercicio 3 g) P(30 &lt;= X &lt;= 40) = 0.02140023 </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 3 h) P(|X-60| &lt;= 20) ="</span>, h_9, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 3 h) P(|X-60| &lt;= 20) ="</span>, h_9, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Ejercicio 3 h) P(|X-60| &lt;= 20) = 0.9544997 </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 3 i) P(|X-60| &gt;= 20) ="</span>, i_9, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 3 i) P(|X-60| &gt;= 20) ="</span>, i_9, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Ejercicio 3 i) P(|X-60| &gt;= 20) = 0.04550026 </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 3 j) Opositores aprox con 70 puntos ="</span>, j_9, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 3 j) Opositores aprox con 70 puntos ="</span>, j_9, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Ejercicio 3 j) Opositores aprox con 70 puntos = 4.839414 </code></pre>
 </div>
@@ -332,7 +331,7 @@ Ejercicio 41 - P(Total &gt; 350 horas) = 0.1770455 </code></pre>
 <p>c) A qué distribuidor beneficia la decisión de la agencia.</p>
 <p>d) Si se asocian los dos distribuciones. ¿qué porcentaje de días obtendrían premio?</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>meta <span class="ot">&lt;-</span> <span class="dv">320</span></span>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>meta <span class="ot">&lt;-</span> <span class="dv">320</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co"># a) Porcentaje de días que obtiene premio el distribuidor A: P(A &gt;= 320)</span></span>
 <span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>p_a_10 <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">mi_normal</span>(<span class="st">"p"</span>, meta, <span class="at">mean =</span> <span class="dv">290</span>, <span class="at">sd =</span> <span class="dv">20</span>)</span>
@@ -353,15 +352,15 @@ Ejercicio 41 - P(Total &gt; 350 horas) = 0.1770455 </code></pre>
 <span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>p_asoc_10 <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">mi_normal</span>(<span class="st">"p"</span>, meta_asoc, <span class="at">mean =</span> media_asoc, <span class="at">sd =</span> sd_asoc)</span>
 <span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>porc_asoc_10 <span class="ot">&lt;-</span> p_asoc_10 <span class="sc">*</span> <span class="dv">100</span></span>
 <span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 4 a) Porcentaje A ="</span>, porc_a_10, <span class="st">"%</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 4 a) Porcentaje A ="</span>, porc_a_10, <span class="st">"%</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Ejercicio 4 a) Porcentaje A = 6.68072 %</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 4 b) Porcentaje B ="</span>, porc_b_10, <span class="st">"%</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 4 b) Porcentaje B ="</span>, porc_b_10, <span class="st">"%</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Ejercicio 4 b) Porcentaje B = 2.275013 %</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 4 d) Porcentaje Asociados ="</span>, porc_asoc_10, <span class="st">"%</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 4 d) Porcentaje Asociados ="</span>, porc_asoc_10, <span class="st">"%</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Ejercicio 4 d) Porcentaje Asociados = 1.267366 %</code></pre>
 </div>
@@ -376,7 +375,7 @@ Ejercicio 41 - P(Total &gt; 350 horas) = 0.1770455 </code></pre>
 <p>d) Porcentaje de operaciones con tarjeta que utiliza el 10% más bajo de la población.</p>
 <p>e) Porcentaje de operaciones del 80% más próximo a la media.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>mu_11 <span class="ot">&lt;-</span> <span class="fl">4.5</span></span>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>mu_11 <span class="ot">&lt;-</span> <span class="fl">4.5</span></span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>sd_11 <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="co"># a) Que un ciudadano utilizado sea mayor al 5% -&gt; P(X &gt; 5)</span></span>
@@ -395,23 +394,23 @@ Ejercicio 41 - P(Total &gt; 350 horas) = 0.1770455 </code></pre>
 <span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a>e_inf <span class="ot">&lt;-</span> <span class="fu">mi_normal</span>(<span class="st">"q"</span>, <span class="fl">0.10</span>, <span class="at">mean =</span> mu_11, <span class="at">sd =</span> sd_11)</span>
 <span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a>e_sup <span class="ot">&lt;-</span> <span class="fu">mi_normal</span>(<span class="st">"q"</span>, <span class="fl">0.90</span>, <span class="at">mean =</span> mu_11, <span class="at">sd =</span> sd_11)</span>
 <span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 5 a) P(X &gt; 5) ="</span>, a_11, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 5 a) P(X &gt; 5) ="</span>, a_11, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Ejercicio 5 a) P(X &gt; 5) = 0.1586553 </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 5 b) Porcentaje &lt; 3.75% ="</span>, b_11, <span class="st">"%</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 5 b) Porcentaje &lt; 3.75% ="</span>, b_11, <span class="st">"%</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Ejercicio 5 b) Porcentaje &lt; 3.75% = 6.68072 %</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 5 c) 20% más alto (valor límite) ="</span>, c_11, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 5 c) 20% más alto (valor límite) ="</span>, c_11, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Ejercicio 5 c) 20% más alto (valor límite) = 4.920812 </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 5 d) 10% más bajo (valor límite) ="</span>, d_11, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 5 d) 10% más bajo (valor límite) ="</span>, d_11, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Ejercicio 5 d) 10% más bajo (valor límite) = 3.859222 </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 5 e) Intervalo central 80% ["</span>, e_inf, <span class="st">","</span>, e_sup, <span class="st">"]</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 5 e) Intervalo central 80% ["</span>, e_inf, <span class="st">","</span>, e_sup, <span class="st">"]</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Ejercicio 5 e) Intervalo central 80% [ 3.859222 , 5.140778 ]</code></pre>
 </div>
@@ -424,7 +423,7 @@ Ejercicio 41 - P(Total &gt; 350 horas) = 0.1770455 </code></pre>
 <p>b) El costo de la revisión es de 200 euros por cada media hora o fracción. ¿Cuál es la probabilidad de que una revisión cueste 400 euros?</p>
 <p>c) Para efectuar una programación sobre la revisiones del motor, ¿cuánto tiempo se debe asignar a cada revisión para que la probabilidad de que cualquier tiempo de revisión mayor al tiempo asignado sea solo de 0.1?</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>rate_35 <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> <span class="dv">22</span></span>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>rate_35 <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> <span class="dv">22</span></span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="co"># a) Probabilidad de que el tiempo de revisión sea menor de 10 minutos -&gt; P(X &lt; 10)</span></span>
 <span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>a_35 <span class="ot">&lt;-</span> <span class="fu">mi_exponencial</span>(<span class="st">"p"</span>, <span class="dv">10</span>, <span class="at">rate =</span> rate_35)</span>
@@ -435,15 +434,15 @@ Ejercicio 41 - P(Total &gt; 350 horas) = 0.1770455 </code></pre>
 <span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a><span class="co"># c) Tiempo asignado para que la probabilidad de superar dicho tiempo sea de 0.1 -&gt; P(X &gt; t) = 0.1, o sea P(X &lt;= t) = 0.9</span></span>
 <span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a>c_35 <span class="ot">&lt;-</span> <span class="fu">mi_exponencial</span>(<span class="st">"q"</span>, <span class="fl">0.9</span>, <span class="at">rate =</span> rate_35)</span>
 <span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 6 a) P(X &lt; 10) ="</span>, a_35, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 6 a) P(X &lt; 10) ="</span>, a_35, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Ejercicio 6 a) P(X &lt; 10) = 0.3652636 </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 6 b) P(30 &lt; X &lt;= 60) ="</span>, b_35, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 6 b) P(30 &lt; X &lt;= 60) ="</span>, b_35, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Ejercicio 6 b) P(30 &lt; X &lt;= 60) = 0.1903318 </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 6 c) Tiempo asignado (cuantil 0.9) ="</span>, c_35, <span class="st">"minutos</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 6 c) Tiempo asignado (cuantil 0.9) ="</span>, c_35, <span class="st">"minutos</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Ejercicio 6 c) Tiempo asignado (cuantil 0.9) = 50.65686 minutos</code></pre>
 </div>
@@ -455,7 +454,7 @@ Ejercicio 41 - P(Total &gt; 350 horas) = 0.1770455 </code></pre>
 <p>a) Probabilidad de que sobrepase las 200 horas de uso.</p>
 <p>b) ¿Cuántas horas se mantiene funcionando con probabilidad 0.95?</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>rate_40 <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fu">log</span>(<span class="fl">0.1</span>) <span class="sc">/</span> <span class="dv">100</span></span>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>rate_40 <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fu">log</span>(<span class="fl">0.1</span>) <span class="sc">/</span> <span class="dv">100</span></span>
 <span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="co"># a) Probabilidad de que sobrepase las 200 horas de uso -&gt; P(X &gt; 200) = 1 - P(X &lt;= 200)</span></span>
 <span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>a_40 <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">mi_exponencial</span>(<span class="st">"p"</span>, <span class="dv">200</span>, <span class="at">rate =</span> rate_40)</span>
@@ -463,11 +462,11 @@ Ejercicio 41 - P(Total &gt; 350 horas) = 0.1770455 </code></pre>
 <span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a><span class="co"># b) ¿Cuántas horas se mantiene funcionando con probabilidad 0.95? -&gt; Cuantil 0.95</span></span>
 <span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>b_40 <span class="ot">&lt;-</span> <span class="fu">mi_exponencial</span>(<span class="st">"q"</span>, <span class="fl">0.95</span>, <span class="at">rate =</span> rate_40)</span>
 <span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 7 a) P(X &gt; 200) ="</span>, a_40, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 7 a) P(X &gt; 200) ="</span>, a_40, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Ejercicio 7 a) P(X &gt; 200) = 0.01 </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 7 b) Horas con probabilidad 0.95 ="</span>, b_40, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 7 b) Horas con probabilidad 0.95 ="</span>, b_40, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Ejercicio 7 b) Horas con probabilidad 0.95 = 130.103 </code></pre>
 </div>
@@ -477,13 +476,13 @@ Ejercicio 41 - P(Total &gt; 350 horas) = 0.1770455 </code></pre>
 <h1>Ejercicio 8</h1>
 <p>La cabina de un avión tiene 30 dispositivos electrónicos (<span class="math inline">\(E_1,...,E_{30}\)</span>), tan pronto como falla <span class="math inline">\(E_1\)</span>, se activa <span class="math inline">\(E_2\)</span> , y así sucesivamente. El tiempo de fallo de cualquier dispositivo electrónico <span class="math inline">\(E_i\)</span> es de tipo exponencial con parámetro <span class="math inline">\(\lambda=0.1\)</span> hora. Hallar la probabilidad de que el tiempo total de funcionamiento de todos los dispositivos supere las 350 horas.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>shape_41 <span class="ot">&lt;-</span> <span class="dv">30</span></span>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>shape_41 <span class="ot">&lt;-</span> <span class="dv">30</span></span>
 <span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>rate_41 <span class="ot">&lt;-</span> <span class="fl">0.1</span></span>
 <span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Hallar la probabilidad de que el tiempo total de funcionamiento supere las 350 horas -&gt; P(Total &gt; 350) = 1 - P(Total &lt;= 350)</span></span>
 <span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>prob_41 <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">mi_gama</span>(<span class="st">"p"</span>, <span class="dv">350</span>, <span class="at">shape =</span> shape_41, <span class="at">rate =</span> rate_41)</span>
 <span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 8 - P(Total &gt; 350 horas) ="</span>, prob_41, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ejercicio 8 - P(Total &gt; 350 horas) ="</span>, prob_41, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Ejercicio 8 - P(Total &gt; 350 horas) = 0.1770455 </code></pre>
 </div>
@@ -543,14 +542,13 @@ Ejercicio 41 - P(Total &gt; 350 horas) = 0.1770455 </code></pre>
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-      const outerScaffold = trigger.parentElement.cloneNode(true);
-      const codeEl = outerScaffold.querySelector('code');
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
         }
-      }
-      return codeEl.innerText;
+        return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
