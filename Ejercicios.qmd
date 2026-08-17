@@ -1,7 +1,8 @@
 ---
 title: "Ejercicios"
-format: html
-editor: visual
+format: 
+  html: 
+    embed-resources: True
 ---
 
 ```{r}
@@ -275,5 +276,35 @@ rate_41 <- 0.1
 prob_41 <- 1 - mi_gama("p", 350, shape = shape_41, rate = rate_41)
 
 cat("Ejercicio 8 - P(Total > 350 horas) =", prob_41, "\n")
+
+```
+
+# Ejercicio 9 
+
+De un lote de 10 misiles, se seleccionan 4 al azar y se disparan. Si el lote contiene 3 misiles defectuosos que no pueden dispararse, ¿cuál es la probabilidad de que:
+
+a\) los 4 puedan dispararse
+
+b\) a lo más fallen 2
+
+c\) calcular la media, varianza y la desviación estándar
+
+```{r}
+
+```
+
+# Ejercicio 10
+
+Un lote contiene 100 piezas de un proveedor de tubería local y 200 unidades de un proveedor de tubería del estado vecino. Si se seleccionan cuatro piezas al azar y sin reemplazo. ¿Cuál es la probabilidad de que todas sean del proveedor local?
+
+```{r}
+
+```
+
+# Ejercicio 11
+
+Si 0.05 es la probabilidad de que cierto instrumento de medición sufra una desviación excesiva. ¿Cuál es la probabilidad de que el sexto de los instrumentos probados sea el primero en molestar esa desviación?
+
+```{r}
 
 ```
