@@ -279,7 +279,7 @@ cat("Ejercicio 8 - P(Total > 350 horas) =", prob_41, "\n")
 
 ```
 
-# Ejercicio 9 
+# Ejercicio 9
 
 De un lote de 10 misiles, se seleccionan 4 al azar y se disparan. Si el lote contiene 3 misiles defectuosos que no pueden dispararse, ¿cuál es la probabilidad de que:
 
@@ -306,5 +306,241 @@ Un lote contiene 100 piezas de un proveedor de tubería local y 200 unidades de 
 Si 0.05 es la probabilidad de que cierto instrumento de medición sufra una desviación excesiva. ¿Cuál es la probabilidad de que el sexto de los instrumentos probados sea el primero en molestar esa desviación?
 
 ```{r}
+
+```
+
+# Ejercicio 12
+
+Dada una variable aleatoria definida para los valores $X=\{2,3\}$ siendo su función de cuantía $P(x)=0.2x$. Obtener la media y el momento ordinario de orden dos, así como la varianza.
+
+```{r}
+# Definimos los valores de X y su función de probabilidad (cuantía)
+x_12 <- c(2, 3)
+p_12 <- 0.2 * x_12
+
+# Media (Esperanza) E[X] = Suma de x * P(x)
+media_12 <- sum(x_12 * p_12)
+
+# Momento ordinario de orden dos E[X^2] = Suma de x^2 * P(x)
+momento2_12 <- sum((x_12^2) * p_12)
+
+# Varianza Var(X) = E[X^2] - (E[X])^2
+var_12 <- momento2_12 - (media_12)^2
+
+cat("Ejercicio 12 - Media E[X] =", media_12, "\n")
+cat("Ejercicio 12 - Momento de orden dos E[X^2] =", momento2_12, "\n")
+cat("Ejercicio 12 - Varianza =", var_12, "\n")
+
+```
+
+# Ejercicio 13
+
+Dada una variable aleatoria definida en el intervalo $[2,3]$ con función de densidad $f(x) = \frac{4}{65} x^3$, obtener media y varianza.
+
+```{r}
+# Definimos la función de densidad
+pdf_13 <- function(x) { (4/65) * x^3 }
+
+# Media E[X] mediante integración
+media_13 <- integrate(function(x) x * pdf_13(x), lower = 2, upper = 3)$value
+
+# E[X^2] para el cálculo de la varianza
+momento2_13 <- integrate(function(x) (x^2) * pdf_13(x), lower = 2, upper = 3)$value
+
+# Varianza Var(X) = E[X^2] - E[X]^2
+var_13 <- momento2_13 - media_13^2
+
+cat("Ejercicio 13 - Media E[X] =", media_13, "\n")
+cat("Ejercicio 13 - Varianza =", var_13, "\n")
+
+```
+
+# Ejercicio 14
+
+Para la distribución $f(x) = \frac{4}{65} x^3$ definida en el intervalo $[2,3]$, hallar la $E[3x^2 - 2x + 1]$.
+
+```{r}
+pdf_14 <- function(x) { (4/65) * x^3 }
+funcion_esperada <- function(x) { 3*x^2 - 2*x + 1 }
+
+# Esperanza E[g(X)] integrando g(x)*f(x)
+esp_14 <- integrate(function(x) funcion_esperada(x) * pdf_14(x), lower = 2, upper = 3)$value
+
+cat("Ejercicio 14 - E[3x^2 - 2x + 1] =", esp_14, "\n")
+
+```
+
+# Ejercicio 15
+
+Un comercial lleva a cabo las visitas a clientes. Cada cliente que consigue le supone unos ingresos de 150 € y, cada visita que realiza, unos gastos que sufraga él mismo. Por experiencias anteriores se conoce que la probabilidad de que a la segunda visita se consiga la primera venta es 0.25. Si el día de hoy se ha planteado visitar a 10 clientes. ¿Qué gasto medio tendrá por cliente si espera (hoy) unos beneficios de 200 €?
+
+```{r}
+# El escenario es un modelo Geométrico donde P(X=2) = 0.25.
+# Sabemos que P(X=2) = (1-p)*p = 0.25. Resolviendo: p - p^2 = 0.25 => (p - 0.5)^2 = 0 => p = 0.5
+p_venta_15 <- 0.5
+visitas_15 <- 10
+ingreso_por_venta_15 <- 150
+beneficio_objetivo_15 <- 200
+
+# Ventas esperadas en 10 visitas (Esperanza de una Binomial n*p)
+ventas_esperadas_15 <- visitas_15 * p_venta_15
+
+# Beneficio = Ingresos Esperados - Gastos Totales
+# 200 = (150 * ventas_esperadas) - (gasto_por_visita * 10)
+# Despejamos el gasto_por_visita:
+gasto_medio_15 <- (ingreso_por_venta_15 * ventas_esperadas_15 - beneficio_objetivo_15) / visitas_15
+
+cat("Ejercicio 15 - Gasto medio por cliente =", gasto_medio_15, "euros\n")
+
+```
+
+# Ejercicio 16
+
+De las siguientes afirmaciones que se llevan a cabo en los siguientes apartados, establecer cuáles son necesariamente ciertas (tautológicas), cuáles necesariamente falsas (contradictorias) o cuáles son simplemente posibles (contingentes). Justificando la respuesta.
+
+a)  si $x$ es v.a. continua y, $x \in [0,8]$ con $f(x)=x/32$ entonces $\sigma_x^2=34$
+
+b)  si $x$ es v.a. continua y, $x \in [0,8]$ con $f(x)=x/32$ entonces $E[2x^2 - 34]=30$
+
+```{r}
+pdf_16 <- function(x) { x / 32 }
+
+# a) Comprobación de la varianza
+media_16 <- integrate(function(x) x * pdf_16(x), lower = 0, upper = 8)$value
+momento2_16 <- integrate(function(x) (x^2) * pdf_16(x), lower = 0, upper = 8)$value
+var_16 <- momento2_16 - media_16^2
+es_cierta_a <- round(var_16, 2) == 34
+
+# b) Comprobación de la esperanza
+esp_b_16 <- integrate(function(x) (2*x^2 - 34) * pdf_16(x), lower = 0, upper = 8)$value
+es_cierta_b <- esp_b_16 == 30
+
+cat("Ejercicio 16 a) es", ifelse(es_cierta_a, "Cierta", "Falsa"), "porque la varianza real es", var_16, "\n")
+cat("Ejercicio 16 b) es", ifelse(es_cierta_b, "Cierta", "Falsa"), "porque el valor calculado es", esp_b_16, "\n")
+
+```
+
+# Ejercicio 17
+
+Una máquina fabricó placas de titanio para el Guggenheim a un coste de 1000 euros cada una. Las fabricaba con una holgura al alza entre 0 y 8 cm. Siendo la holgura una variable aleatoria. La holgura de la pieza (siempre a mayor) no podía sobrepasar los 6 cm, las placas con mayor holgura no se podía utilizar y por tanto vender, pero si tenían un valor residual de 500 euros. Las placas útiles se vendían a 1500 cada una. Si para revestir la obra de Gerhy se fabricaron 20000 placas, calcular el beneficio esperado de la empresa que fabricó el revestimiento, conociendo que la holgura tenía una función de densidad $f(x)=x/32$.
+
+```{r}
+pdf_17 <- function(x) { x / 32 }
+
+# Probabilidad de placa útil (holgura <= 6) y no útil (holgura > 6)
+prob_util_17 <- integrate(pdf_17, lower = 0, upper = 6)$value
+prob_inutil_17 <- 1 - prob_util_17
+
+# Parámetros económicos
+coste_17 <- 1000
+venta_util_17 <- 1500
+venta_residual_17 <- 500
+total_placas_17 <- 20000
+
+# Beneficio unitario
+beneficio_util_17 <- venta_util_17 - coste_17
+beneficio_inutil_17 <- venta_residual_17 - coste_17
+
+# Beneficio esperado por cada placa y beneficio total
+esp_beneficio_uni_17 <- (beneficio_util_17 * prob_util_17) + (beneficio_inutil_17 * prob_inutil_17)
+beneficio_total_17 <- esp_beneficio_uni_17 * total_placas_17
+
+cat("Ejercicio 17 - Beneficio esperado de la empresa =", beneficio_total_17, "euros\n")
+
+```
+
+# Ejercicio 18
+
+El número de errores contables que se cometen semanalmente en una empresa es por término medio de tres y función de cuantía es $P(x) = \frac{e^{-3} 3^x}{x!}$ para $x=0,1,2,3...$. Si no se cometen errores en una semana el coste es cero, si se cometen menos de tres dicho coste semanal es de 100 euros y si se cometen más dicho coste pasa a ser de 200 euros sea cual fuere su número. Calcular el coste que cabe esperar que tendrá dicha empresa por este concepto en un mes de cuatro semanas.
+
+```{r}
+# Usamos tu función mi_poisson ya que la distribución descrita es Poisson con lambda = 3
+lambda_18 <- 3
+
+# Probabilidades de los distintos escenarios
+# P(X = 0)
+p_cero_18 <- mi_poisson("d", x = 0, lambda = lambda_18)
+
+# P(0 < X < 3) es decir, 1 o 2 errores. Calculamos P(X <= 2) y restamos P(X = 0)
+p_menor_tres_18 <- mi_poisson("p", x = 2, lambda = lambda_18) - p_cero_18
+
+# P(X >= 3)
+p_mayor_igual_tres_18 <- 1 - mi_poisson("p", x = 2, lambda = lambda_18)
+
+# Coste semanal esperado
+coste_semanal_18 <- (0 * p_cero_18) + (100 * p_menor_tres_18) + (200 * p_mayor_igual_tres_18)
+
+# Coste mensual (4 semanas)
+coste_mensual_18 <- 4 * coste_semanal_18
+
+cat("Ejercicio 18 - Coste esperado mensual =", coste_mensual_18, "euros\n")
+
+```
+
+# Ejercicio 19
+
+A una empresa le ofrecen 85000 u.m diarias por un contrato que le obliga a prestar servicios de limpieza a seis salas de espectáculos. Si una vez acabada la función una sala presenta condiciones que podíamos llamar normales el coste de limpieza para la empresa será de 10600 u.m., en el caso de que esté más sucia de lo normal el coste es de 15200. Si por experiencias anteriores conocemos que una sala está excesivamente sucia en el 10% de las veces. Calcular el beneficio esperado que obtendrá la empresa de limpieza si acepta el contrato.
+
+```{r}
+# El número de salas sucias sigue una Binomial(n=6, p=0.10)
+n_salas_19 <- 6
+p_sucia_19 <- 0.10
+ingreso_19 <- 85000
+costo_normal_19 <- 10600
+costo_sucia_19 <- 15200
+
+# Número esperado de salas sucias y normales
+salas_sucias_esp_19 <- n_salas_19 * p_sucia_19
+salas_normales_esp_19 <- n_salas_19 - salas_sucias_esp_19
+
+# Costo total esperado
+costo_total_esp_19 <- (salas_normales_esp_19 * costo_normal_19) + (salas_sucias_esp_19 * costo_sucia_19)
+
+# Beneficio esperado = Ingreso - Costo esperado
+beneficio_esp_19 <- ingreso_19 - costo_total_esp_19
+
+cat("Ejercicio 19 - Beneficio esperado diario =", beneficio_esp_19, "u.m.\n")
+
+```
+
+# Ejercicio 20
+
+Nuestra empresa produce miles de metros de tela al año. Tenemos un coste fijo para dicha producción de 10000 euros. El coste de producción es de 10 euros el metro. Si esperamos obtener unos beneficios de 3000 euros. ¿A qué precio el metro tendremos que vender nuestra tela? (la producción es una v.a. cuya función de densidad es $f(x)=4x^3$ para $x \in [0,1]$ en miles) (se vende toda la producción).
+
+```{r}
+pdf_20 <- function(x) { 4 * x^3 }
+coste_fijo_20 <- 10000
+# El coste es de 10 euros por metro. Dado que X está en miles, el coste por X es 10 * 1000 = 10000
+coste_variable_mil_20 <- 10 * 1000 
+beneficio_obj_20 <- 3000
+
+# Esperanza de producción X (en miles de metros)
+esp_x_20 <- integrate(function(x) x * pdf_20(x), lower = 0, upper = 1)$value
+
+# E[Beneficio] = (Precio * 1000 * E[X]) - (Coste_fijo + Coste_variable * 1000 * E[X]) = 3000
+# Despejamos el Precio por metro:
+precio_metro_20 <- (beneficio_obj_20 + coste_fijo_20 + (coste_variable_mil_20 * esp_x_20)) / (1000 * esp_x_20)
+
+cat("Ejercicio 20 - Precio por metro de venta =", precio_metro_20, "euros\n")
+
+```
+
+# Ejercicio 21
+
+Una máquina fabrica piezas de acero de una cierta longitud y que nunca supera los 10 metros. Si la pieza es menor o igual a 4 metros ésta no se puede vender y si supera esta medida se corta el excedente de los cuatro metros y se utiliza el mismo para fundir. Si el coste de producción es de 100 pesetas y una pieza se vende a 600 la unidad. Obtener el beneficio esperado sabiendo que la longitud (L) de la pieza fabricada es en función de X en metros $P(L \le x) = (1 - e^{-0.25x})$ siendo $x \in [0,10]$.
+
+```{r}
+# Evaluamos la CDF directamente para encontrar la probabilidad de que se pueda vender (L > 4)
+# P(L > 4) = 1 - P(L <= 4)
+prob_mayor_cuatro_21 <- 1 - (1 - exp(-0.25 * 4))
+
+coste_produccion_21 <- 100
+precio_venta_21 <- 600
+
+# El ingreso es 600 si L > 4, y 0 si L <= 4. El coste siempre es 100.
+ingreso_esperado_21 <- precio_venta_21 * prob_mayor_cuatro_21
+beneficio_esperado_21 <- ingreso_esperado_21 - coste_produccion_21
+
+cat("Ejercicio 21 - Beneficio esperado por pieza =", beneficio_esperado_21, "pesetas\n")
 
 ```
