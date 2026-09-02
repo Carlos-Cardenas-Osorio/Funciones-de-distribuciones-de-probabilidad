@@ -223,11 +223,6 @@ mi_jicuadrado <- function(tipo, x, df) {
 }
 
 
-# ---------------------------------------------------------------------
-# SECCIÓN 2: MAI (5 Distribuciones)
-# Distribuciones: Geométrico, Hipergeométrico, F, Gama, Beta
-# ---------------------------------------------------------------------
-
 mi_geometrico <- function(tipo, x, prob) {
   if (tipo == "d") {
     (1 - prob)^x * prob  # Lógica de masa de probabilidad (PMF)
@@ -642,7 +637,7 @@ menu_distribuciones <- function() {
 }
 
 # =====================================================================
-# FASE 3: MÓDULO DE TEORÍA DE DECISIONES (SIN HURWICZ)
+# FASE 3: MÓDULO DE TEORÍA DE DECISIONES
 # =====================================================================
 
 menu_decisiones <- function() {
