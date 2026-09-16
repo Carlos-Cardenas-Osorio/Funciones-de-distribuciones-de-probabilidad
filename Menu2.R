@@ -348,8 +348,6 @@ mi_gama <- function(tipo, x, shape, rate = 1) {
     }, interval = c(0, limite_superior))$root
     
   } else if (tipo == "r") {
-    # Método basado en la suma de exponenciales (para shape entero) o métodos generales
-    # Usando el método de transformación/suma para shape entero o aproximación general:
     replicate(x, {
       # Si shape es entero, una Gamma(shape, rate) es la suma de 'shape' Exponenciales(rate)
       if (shape == floor(shape)) {
@@ -386,7 +384,6 @@ mi_beta <- function(tipo, x, shape1, shape2) {
     }, interval = c(0, 1))$root
     
   } else if (tipo == "r") {
-    # Una Beta(shape1, shape2) se obtiene como X / (X + Y) donde X ~ Gamma(shape1, 1) y Y ~ Gamma(shape2, 1)
     replicate(x, {
       g1 <- sum(-log(runif(ceiling(shape1))))
       g2 <- sum(-log(runif(ceiling(shape2))))
@@ -600,7 +597,7 @@ ajuste_maxima_verosimilitud <- function(dist_elegida, tipo_var) {
       cat("Correlación Cor(X,Y):", cor(x, y), "\n")
       cat("-----------------------------\n")
     } else {
-      cat("\n⚠️ Advertencia: Los vectores X e Y no tienen el mismo tamaño. Se omitirá el cálculo de correlación.\n")
+      cat("\n Advertencia: Los vectores X e Y no tienen el mismo tamaño. Se omitirá el cálculo de correlación.\n")
     }
   }
   
@@ -640,7 +637,7 @@ ajuste_maxima_verosimilitud <- function(dist_elegida, tipo_var) {
     cat(sprintf("Parámetros estimados -> Shape: %.4f, Rate: %.4f\n", params$shape, params$rate))
     
   } else {
-    cat("\n⚠️ Para esta distribución compleja se recomienda usar métodos numéricos (ej. MASS::fitdistr) o parámetros conocidos.\n")
+    cat("\n Para esta distribución compleja se recomienda usar métodos numéricos (ej. MASS::fitdistr) o parámetros conocidos.\n")
     return(NULL)
   }
   
@@ -738,7 +735,7 @@ capturar_parametros_manual <- function(dist_elegida) {
 # =====================================================================
 
 menu_probabilidades_avanzado <- function(dist_elegida, params, tipo_var) {
-  # --- HELPERS (Funciones puente hacia tus fórmulas matemáticas) ---
+  # --- Funciones puente hacia tus fórmulas matemáticas ---
   calc_F <- function(x_val) {
     if (dist_elegida == "normal") return(mi_normal("p", x_val, params$mean, params$sd))
     if (dist_elegida == "binomial") return(mi_binomial("p", x_val, params$size, params$prob))
@@ -923,7 +920,7 @@ menu_probabilidades_avanzado <- function(dist_elegida, params, tipo_var) {
       cat("\n--- NÚMEROS GENERADOS ---\n")
       print(calc_R(n_val))
     } else {
-      cat("\n❌ Opción no válida.\n")
+      cat("\n Opción no válida.\n")
     }
   }
 }
@@ -1035,7 +1032,7 @@ menu_ajuste_comparativo <- function(tipo_var) {
         else cat("\n❌ Los datos no están entre 0 y 1. Beta no aplicable.\n")
       }
       else if (opc == "0") break
-      else cat("\n❌ Opción no válida.\n")
+      else cat("\n Opción no válida.\n")
     }
     
   } else { 
@@ -1090,7 +1087,7 @@ menu_ajuste_comparativo <- function(tipo_var) {
       else if (opc == "3") menu_probabilidades_avanzado("geometrica", params_geo, tipo_var)
       else if (opc == "4") menu_probabilidades_avanzado("hipergeometrica", params_hyp, tipo_var)
       else if (opc == "0") break
-      else cat("\n❌ Opción no válida.\n")
+      else cat("\n Opción no válida.\n")
     }
   }
 }
