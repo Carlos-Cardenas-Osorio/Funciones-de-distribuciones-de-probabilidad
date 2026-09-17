@@ -1,0 +1,13 @@
+---
+title: "Análisis Actuarial de Siniestros por Inundación (NFIP - FEMA)"
+author: "Carlos Cárdenas Osorio · Amairani Martínez Quintero"
+format: 
+  html:
+    toc: true
+    embed-resources: true
+    theme: cosmo
+---
+
+# Objetivo 
+
+Modelar el riesgo hidrometeorológico utilizando datos públicos del National Flood Insurance Program (NFIP) de FEMA. Analizar el comportamiento de la cartera bajo diferentes escenarios de estrés (temporada seca vs. temporada de huracanes) en zonas de alta afectación costera, con el fin de estructurar estrategias óptimas de retención y reaseguro mediante la Teoría de Decisiones.
