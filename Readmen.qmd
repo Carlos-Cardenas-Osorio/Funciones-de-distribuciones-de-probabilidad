@@ -8,6 +8,6 @@ format:
     theme: cosmo
 ---
 
-# Objetivo 
+# Objetivo
 
 Modelar el riesgo hidrometeorológico utilizando datos públicos del National Flood Insurance Program (NFIP) de FEMA. Analizar el comportamiento de la cartera bajo diferentes escenarios de estrés (temporada seca vs. temporada de huracanes) en zonas de alta afectación costera, con el fin de estructurar estrategias óptimas de retención y reaseguro mediante la Teoría de Decisiones.

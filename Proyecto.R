@@ -1113,7 +1113,7 @@ estados_interes <- c("FL", "TX", "LA", "CO", "NV", "UT")
 # 2. Función para descargar datos limitados por estado
 descargar_fema_estado <- function(estado) {
   cat("Descargando datos de:", estado, "...\n")
-  # Top 10,000 registros por estado para tener una muestra equilibrada y rápida
+  # Top 5,000 registros por estado para tener una muestra equilibrada y rápida
   url <- paste0("https://www.fema.gov/api/open/v2/FimaNfipClaims?$filter=state%20eq%20'", estado, "'&$top=5000")
   
   # Usamos tryCatch para evitar que el código se detenga si hay un error de conexión
@@ -1201,3 +1201,9 @@ frec_tx_seca      <- frecuencia_diaria %>% filter(state == "TX", temporada == "S
 # LOUISIANA (Discreto)
 frec_la_huracanes <- frecuencia_diaria %>% filter(state == "LA", temporada == "Huracanes") %>% pull(numero_siniestros)
 frec_la_seca      <- frecuencia_diaria %>% filter(state == "LA", temporada == "Seca") %>% pull(numero_siniestros)
+
+
+##HACER EL DEL VALOR ESPERADO (QUIEN PIERDE MENOS O GANA MÁS)- Porcentajes (pérdida de oportunidad)
+
+
+
